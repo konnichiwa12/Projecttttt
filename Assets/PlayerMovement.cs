@@ -23,9 +23,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        cam.position = transform.position + new Vector3(.3f, -.3f, -1.6f);
-        scooter.position = transform.position + new Vector3(0f, -.1f, -1f);
+        cam.position = transform.position + new Vector3(0f, -.5f, -.6f);
+        scooter.position = transform.position;
         //scooter.eulerAngles = new Vector3(scooter.eulerAngles.x, cam.eulerAngles.y, scooter.eulerAngles.z);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collided with " + collision.collider.name);
     }
 
     void OnMove(InputValue movementValue)

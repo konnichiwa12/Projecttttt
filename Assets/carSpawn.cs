@@ -21,14 +21,16 @@ public class carSpawn : MonoBehaviour
         double randNum = rnd.NextDouble();
         if (randNum > 0.0140)
         {
-            Debug.Log("No Car");
+            //Debug.Log("No Car");
             return;
         }
         double direction = rnd.NextDouble();
+        double color = rnd.Next(1, 6);
         GameObject car = direction >= 0.5 ? Instantiate(spawnableCarL) : Instantiate(spawnableCarR);
+        car.transform.Find("Color" + color).gameObject.SetActive(true);
         if (randNum <= .0035)
         {//spawn car in road 1
-            Debug.Log("Spawn in road 1"); //Vector3(27.6200008,0.850000024,-40.9000015)
+            //Debug.Log("Spawn in road 1"); //Vector3(27.6200008,0.850000024,-40.9000015)
             if (direction >= 0.5)
             {
                 car.transform.position = new Vector3(26.2000008f, 0.850000024f, -80.8000031f);
@@ -40,7 +42,7 @@ public class carSpawn : MonoBehaviour
         }
         else if (randNum <= .007)
         {//spawn car in road 2
-            Debug.Log("Spawn in road 2"); //Vector3(27.6200008,0.850000024,9.10000038)
+            //Debug.Log("Spawn in road 2"); //Vector3(27.6200008,0.850000024,9.10000038)
             if (direction >= 0.5)
             {
                 car.transform.position = new Vector3(26.2000008f, 0.850000024f, -41f);
@@ -52,7 +54,7 @@ public class carSpawn : MonoBehaviour
         }
         else if (randNum <= .0105)
         {//spawn car in road 3
-            Debug.Log("Spawn in road 3"); //Vector3(27.6200008,0.850000024,49.2999992)
+            //Debug.Log("Spawn in road 3"); //Vector3(27.6200008,0.850000024,49.2999992)
             if (direction >= 0.5)
             {
                 car.transform.position = new Vector3(26.2000008f, 0.850000024f, 9.30000019f);
@@ -64,7 +66,7 @@ public class carSpawn : MonoBehaviour
         }
         else if (randNum <= .0140)
         {//spawn car in road 4
-            Debug.Log("Spawn in road 4"); //Vector3(27.6200008, 0.850000024, -80.4000015)
+            //Debug.Log("Spawn in road 4"); //Vector3(27.6200008, 0.850000024, -80.4000015)
             if (direction >= 0.5)
             {
                 car.transform.position = new Vector3(26.2000008f, 0.850000024f, 49f);
