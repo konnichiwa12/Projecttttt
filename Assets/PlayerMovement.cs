@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 0;
     public Transform cam;
     public Transform scooter;
+    public Transform marker;
     Vector3 previousPosition;
     Vector3 lastMoveDirection;
 
@@ -30,17 +32,23 @@ public class PlayerMovement : MonoBehaviour
         cam.position = transform.position + new Vector3(0f, -.5f, -.6f);
         scooter.position = transform.position;
         //scooter.eulerAngles = new Vector3(scooter.eulerAngles.x, cam.eulerAngles.y, scooter.eulerAngles.z);
+        marker.position = transform.position + lastMoveDirection;
+        scooter.LookAt(marker.position);
         if (transform.position != previousPosition)
         {
             lastMoveDirection = (transform.position - previousPosition).normalized;
             previousPosition = transform.position;
-            Debug.Log(lastMoveDirection);
+            //Debug.Log(lastMoveDirection);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided with " + collision.collider.name);
+        Debug.Log("Collided");
+        if (collision.gameObject.tag == "Car")
+        {
+            SceneManager.LoadScene("GameOverScreen");
+        }
     }
 
     void OnMove(InputValue movementValue)
