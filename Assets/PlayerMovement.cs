@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 0;
     public Transform cam;
     public Transform scooter;
+    Vector3 previousPosition;
+    Vector3 lastMoveDirection;
 
     private Rigidbody rb;
     private float movementX;
@@ -19,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     {
         // Sets the value of rb by getting a reference of the Rigidbody component attached to the player sphere
         rb = GetComponent<Rigidbody>();
+        previousPosition = transform.position;
+        lastMoveDirection = Vector3.zero;
     }
 
     void Update()
@@ -26,6 +30,12 @@ public class PlayerMovement : MonoBehaviour
         cam.position = transform.position + new Vector3(0f, -.5f, -.6f);
         scooter.position = transform.position;
         //scooter.eulerAngles = new Vector3(scooter.eulerAngles.x, cam.eulerAngles.y, scooter.eulerAngles.z);
+        if (transform.position != previousPosition)
+        {
+            lastMoveDirection = (transform.position - previousPosition).normalized;
+            previousPosition = transform.position;
+            Debug.Log(lastMoveDirection);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
