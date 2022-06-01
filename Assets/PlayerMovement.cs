@@ -49,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("GameOverScreen");
         }
+        if (collision.gameObject.tag == "Finish")
+        {
+            SceneManager.LoadScene("TitleScreen");
+        }
     }
 
     void OnMove(InputValue movementValue)
